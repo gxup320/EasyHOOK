@@ -7,21 +7,22 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 	{
 		KBDLLHOOKSTRUCT Param;
 		memcpy(&Param, lParam, 20);
-		if (wParam == WM_KEYDOWN)
+		switch (wParam)
 		{
+		case WM_KEYDOWN:
 			printf("KeyDown:%d\n", Param.vkCode);
-		}
-		else if (wParam == WM_SYSKEYDOWN)
-		{
+			break;
+		case WM_SYSKEYDOWN:
 			printf("SysKeyDown:%d\n", Param.vkCode);
-		}
-		else if (wParam == WM_KEYUP)
-		{
+			break;
+		case WM_KEYUP:
 			printf("KeyUp:%d\n", Param.vkCode);
-		}
-		else if (wParam == WM_SYSKEYUP)
-		{
+			break;
+		case WM_SYSKEYUP:
 			printf("SysKeyUp:%d\n", Param.vkCode);
+			break;
+		default:
+			break;
 		}
 	}
 	//Call next HOOK. If you want to intercept the message, plase return 1;.
